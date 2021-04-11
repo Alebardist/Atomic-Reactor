@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtomicReactorControl", "AtomicReactorControl\AtomicReactorControl.csproj", "{A2C48D62-746B-437F-8F95-AA63C23C1ACC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARCTests", "Tests\ARCTests\ARCTests.csproj", "{A457EA74-8DBF-4CD9-A80F-AEBA0E251B2D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2C48D62-746B-437F-8F95-AA63C23C1ACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2C48D62-746B-437F-8F95-AA63C23C1ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2C48D62-746B-437F-8F95-AA63C23C1ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2C48D62-746B-437F-8F95-AA63C23C1ACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A457EA74-8DBF-4CD9-A80F-AEBA0E251B2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A457EA74-8DBF-4CD9-A80F-AEBA0E251B2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A457EA74-8DBF-4CD9-A80F-AEBA0E251B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A457EA74-8DBF-4CD9-A80F-AEBA0E251B2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F2932302-DAE2-40C6-AE59-ED9BEF574C0A}
+	EndGlobalSection
+EndGlobal
