@@ -67,10 +67,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Enums\WorkModes.cs" />
-    <Compile Include="Model\Interfaces\IReactorParams.cs" />
+    <Compile Include="Enums\WorkModes.cs" />
+    <Compile Include="ViewModel\Interfaces\IReactorParams.cs" />
     <Compile Include="Model\Reactor.cs" />
-    <Compile Include="Model\ParamsForReactor.cs" />
+    <Compile Include="ViewModel\ParamsForReactor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

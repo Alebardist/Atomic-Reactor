@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AtomicReactorControl.Model.Enums
+namespace AtomicReactorControl.Enums
 {
     public enum WorkMode
     {

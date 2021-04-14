@@ -1,6 +1,6 @@
-﻿using AtomicReactorControl.Model.Enums;
+﻿using AtomicReactorControl.Enums;
 
-namespace AtomicReactorControl.Model
+namespace AtomicReactorControl.ViewModel.Interfaces
 {
     public interface IReactorParams
     {
@@ -10,5 +10,8 @@ namespace AtomicReactorControl.Model
         double PowerConsumption { get; set; }
         double StoredEnergy { get; set; }
         WorkMode CurrentWorkMode { get; set; }
+        double EnergyOutput { get; set; }
+
+        void ResetParams();
     }
 }

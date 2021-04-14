@@ -1,7 +1,8 @@
-﻿using AtomicReactorControl.Properties;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Threading;
+
+using AtomicReactorControl.ViewModel.Interfaces;
 
 namespace AtomicReactorControl.Model
 {
@@ -12,73 +13,6 @@ namespace AtomicReactorControl.Model
         private const double Coolant = 10;
 
         private readonly IReactorParams _reactorParams;
-
-        private double _temperature;
-
-        public double Temperature
-        {
-            get => _temperature;
-            set
-            {
-                if (value > 0)
-                {
-                    _temperature = value;
-                }
-                else
-                {
-                    _temperature = 0;
-                }
-            }
-        }
-
-        private int _speedOfSplitting = 0;
-
-        public int SpeedOfSplitting
-        {
-            get { return _speedOfSplitting; }
-            set
-            {
-                if (value >= 0)
-                {
-                    _speedOfSplitting = value;
-                }
-                else
-                {
-#if TRACE
-                    Debug.WriteLine($"{value} is < 0");
-#endif
-                    throw new ArgumentOutOfRangeException($"{nameof(_reactorParams.SpeedOfSplitting)}", Resources.Reactor_SpeedOfSplitting_Can_t_be_lower_0);
-                }
-            }
-        }
-
-        private double _fuelCount = 80;
-
-        public double FuelCount
-        {
-            get => _fuelCount;
-            set
-            {
-                if (value >= 0)
-                {
-                    _fuelCount = value;
-                }
-            }
-        }
-
-        private double _storedEnergy;
-
-        public double StoredEnergy
-        {
-            get => _storedEnergy;
-            set
-            {
-                if (value >= 0)
-                {
-                    _storedEnergy = 0;
-                }
-            }
-        }
 
         public Reactor(IReactorParams reactorParams)
         {
@@ -93,7 +27,7 @@ namespace AtomicReactorControl.Model
         {
             //set starting parameters
             ReadReactorParams();
-            while (Temperature < 380 && FuelCount >= FuelEfficiency * _reactorParams.SpeedOfSplitting)
+            while (_reactorParams.Temperature < 380 && _reactorParams.Fuel >= FuelEfficiency * _reactorParams.SpeedOfSplitting)
             {
                 if (token.IsCancellationRequested)
                 {
@@ -116,20 +50,28 @@ namespace AtomicReactorControl.Model
             }
 
 #if TRACE
-            Debug.WriteLine($"{Temperature} is > 380");
+            if (_reactorParams.Temperature > 380)
+            {
+                Debug.WriteLine($"{_reactorParams.Temperature} is > 380");
+            }
+            if (_reactorParams.Fuel <= 0)
+            {
+                Debug.WriteLine($"{_reactorParams.Fuel} is <= 0");
+            }
 #endif
         }
 
         private void SetReactorParams()
         {
-            _reactorParams.Temperature = Temperature;
-            _reactorParams.Fuel = FuelCount;
+            _reactorParams.Temperature = _reactorParams.Temperature;
+            _reactorParams.Fuel = _reactorParams.Fuel;
+            _reactorParams.EnergyOutput = EnergyOutputModificator * _reactorParams.SpeedOfSplitting;
         }
 
         private void ReadReactorParams()
         {
-            Temperature = _reactorParams.Temperature;
-            FuelCount = _reactorParams.Fuel;
+            _reactorParams.Temperature = _reactorParams.Temperature;
+            _reactorParams.Fuel = _reactorParams.Fuel;
         }
 
         private void ComputeEnergyOutput()
@@ -146,13 +88,13 @@ namespace AtomicReactorControl.Model
         {
             if (_reactorParams.CurrentWorkMode == Enums.WorkMode.HeatWithinWork)
             {
-                Temperature += _reactorParams.SpeedOfSplitting;
+                _reactorParams.Temperature += _reactorParams.SpeedOfSplitting;
             }
 
             // 2nd mode
             else if (_reactorParams.CurrentWorkMode == Enums.WorkMode.HeatByFormulae)
             {
-                Temperature = _reactorParams.SpeedOfSplitting;
+                _reactorParams.Temperature = _reactorParams.SpeedOfSplitting;
             }
 #if TRACE
             else
@@ -165,12 +107,12 @@ namespace AtomicReactorControl.Model
 
         private void ComputeFuelConsumption()
         {
-            FuelCount -= FuelEfficiency * _reactorParams.SpeedOfSplitting;
+            _reactorParams.Fuel -= FuelEfficiency * _reactorParams.SpeedOfSplitting;
         }
 
         private void ComputeCoolant()
         {
-            Temperature -= Coolant;
+            _reactorParams.Temperature -= Coolant;
         }
     }
 }

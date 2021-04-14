@@ -1,4 +1,6 @@
-using AtomicReactorControl.Model;
+using AtomicReactorControl.ViewModel;
+using AtomicReactorControl.ViewModel.Interfaces;
+
 using System;
 using Xunit;
 

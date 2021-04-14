@@ -1,17 +1,19 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using AtomicReactorControl.Enums;
 
-using AtomicReactorControl.Model.Enums;
-namespace AtomicReactorControl.Model
+namespace AtomicReactorControl.ViewModel
 {
-    public class ParamsForReactor : INotifyPropertyChanged, IReactorParams
+    public class ParamsForReactor : INotifyPropertyChanged, Interfaces.IReactorParams
     {
         private double _speedOfSplitting = 1;
         private double _temperature = 40;
         private double _fuel = 300;
         private double _powerConsumption = 0;
-        private double _storedEnergy = 555;
+        private double _storedEnergy = 1500;
         private WorkMode _currentWorkMode;
+
+        private double _energyOutput = 0;
 
         public double SpeedOfSplitting
         {
@@ -38,7 +40,10 @@ namespace AtomicReactorControl.Model
             get => _temperature;
             set
             {
-                _temperature = value;
+                if (value >= 0)
+                {
+                    _temperature = value;
+                }
                 OnPropertyChanged(nameof(Temperature));
             }
         }
@@ -74,6 +79,28 @@ namespace AtomicReactorControl.Model
 
                 OnPropertyChanged(nameof(StoredEnergy));
             }
+        }
+
+        public double EnergyOutput
+        {
+            get => _energyOutput; 
+            set
+            {
+                _energyOutput = value;
+                OnPropertyChanged(nameof(EnergyOutput));
+            }
+        }
+
+
+        public void ResetParams()
+        {
+            SpeedOfSplitting = 0;
+            PowerConsumption = 0;
+            Temperature = 40;
+            Fuel = 300;
+            CurrentWorkMode = WorkMode.HeatWithinWork;
+            StoredEnergy = 1500;
+            EnergyOutput = 0;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
