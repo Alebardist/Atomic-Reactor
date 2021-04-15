@@ -8,7 +8,8 @@
     Height="480"
     FontSize="16">
     <Window.Resources>
-        <vm:ParamsForReactor x:Key="ResourceReactorParams"/>
+        <vm:ParamsForReactor x:Key="ResourceReactorParams" />
+        <vm:IndicatorsColors x:Key="ResourceIndicatorsColors" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -21,11 +22,11 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <!--Params-->
+        <!--  Params  -->
         <StackPanel
             Grid.Row="0"
-            Grid.Column="1"
             Grid.RowSpan="2"
+            Grid.Column="1"
             Orientation="Vertical">
             <TextBlock FontSize="18" Text="Temperature " />
             <TextBlock
@@ -131,33 +132,49 @@
                     Content="RESET"
                     FontWeight="Bold" />
             </StackPanel>
+            
+            <!--  indicators  -->
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Ellipse
+                    Width="20"
+                    Height="20"
+                    Fill="{Binding EllipseTemperatureColor, Source={StaticResource ResourceIndicatorsColors}}" />
+                <TextBlock Text="Temp status" />
+                <Ellipse
+                    Width="20"
+                    Height="20"
+                    Fill="{Binding EllipseEnergyColor, Source={StaticResource ResourceIndicatorsColors}}" />
+                <TextBlock Text="Energy status" />
+            </StackPanel>
+
         </StackPanel>
 
         <!--  load bars  -->
-        <StackPanel
-            Grid.Row="1"
-            Orientation="Vertical">
+        <StackPanel Grid.Row="1" Orientation="Vertical">
             <TextBlock FontSize="20" Text="Temperature" />
             <ProgressBar
                 Width="300"
                 Height="30"
+                HorizontalAlignment="Left"
                 Maximum="380"
-                Value="{Binding ElementName=Temperature, Path=Text}" HorizontalAlignment="Left" />
+                Value="{Binding ElementName=Temperature, Path=Text}" />
 
             <TextBlock FontSize="20" Text="Splitting atoms" />
             <ProgressBar
                 Width="300"
                 Height="30"
+                HorizontalAlignment="Left"
                 Maximum="125"
                 Minimum="0"
-                Value="{Binding ElementName=SliderSplitting, Path=Value}" HorizontalAlignment="Left" />
+                Value="{Binding ElementName=SliderSplitting, Path=Value}" />
             <TextBlock FontSize="20" Text="Stored energy" />
             <ProgressBar
                 Width="300"
                 Height="30"
+                HorizontalAlignment="Left"
                 Maximum="10000"
                 Minimum="0"
-                Value="{Binding StoredEnergy, Source={StaticResource ResourceReactorParams}}" HorizontalAlignment="Left" />
+                Value="{Binding StoredEnergy, Source={StaticResource ResourceReactorParams}}" />
         </StackPanel>
     </Grid>
 </Window>

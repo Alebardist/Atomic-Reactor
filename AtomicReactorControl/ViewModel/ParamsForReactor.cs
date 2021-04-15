@@ -11,9 +11,8 @@ namespace AtomicReactorControl.ViewModel
         private double _fuel = 300;
         private double _powerConsumption = 0;
         private double _storedEnergy = 1500;
-        private WorkMode _currentWorkMode;
-
         private double _energyOutput = 0;
+        private WorkMode _currentWorkMode;
 
         public double SpeedOfSplitting
         {
@@ -58,14 +57,14 @@ namespace AtomicReactorControl.ViewModel
             }
         }
 
-        public WorkMode CurrentWorkMode 
-        { 
+        public WorkMode CurrentWorkMode
+        {
             get => _currentWorkMode;
-            set => _currentWorkMode = value; 
+            set => _currentWorkMode = value;
         }
         public double StoredEnergy
         {
-            get => _storedEnergy; 
+            get => _storedEnergy;
             set
             {
                 if (value < 0)
@@ -83,14 +82,13 @@ namespace AtomicReactorControl.ViewModel
 
         public double EnergyOutput
         {
-            get => _energyOutput; 
+            get => _energyOutput;
             set
             {
                 _energyOutput = value;
                 OnPropertyChanged(nameof(EnergyOutput));
             }
         }
-
 
         public void ResetParams()
         {
@@ -109,6 +107,5 @@ namespace AtomicReactorControl.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-
     }
 }
