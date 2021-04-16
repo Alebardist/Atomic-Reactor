@@ -9,7 +9,7 @@
     FontSize="16">
     <Window.Resources>
         <vm:ParamsForReactor x:Key="ResourceReactorParams" />
-        <vm:IndicatorsColors x:Key="ResourceIndicatorsColors" />
+        <vm:ColorToSolidBrushConverter x:Key="ColorToSolidBrushConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -132,18 +132,18 @@
                     Content="RESET"
                     FontWeight="Bold" />
             </StackPanel>
-            
+
             <!--  indicators  -->
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Ellipse
                     Width="20"
                     Height="20"
-                    Fill="{Binding EllipseTemperatureColor, Source={StaticResource ResourceIndicatorsColors}}" />
+                    Fill="{Binding EllipseTemperatureColor, Source={StaticResource ResourceReactorParams}, Converter={StaticResource ColorToSolidBrushConverter}}" />
                 <TextBlock Text="Temp status" />
                 <Ellipse
                     Width="20"
                     Height="20"
-                    Fill="{Binding EllipseEnergyColor, Source={StaticResource ResourceIndicatorsColors}}" />
+                    Fill="{Binding EllipseEnergyColor, Source={StaticResource ResourceReactorParams}, Converter={StaticResource ColorToSolidBrushConverter}}" />
                 <TextBlock Text="Energy status" />
             </StackPanel>
 

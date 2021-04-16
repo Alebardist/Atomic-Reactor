@@ -1,6 +1,7 @@
-﻿using System.ComponentModel;
+﻿using AtomicReactorControl.Enums;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using AtomicReactorControl.Enums;
+using System.Windows.Media;
 
 namespace AtomicReactorControl.ViewModel
 {
@@ -10,9 +11,34 @@ namespace AtomicReactorControl.ViewModel
         private double _temperature = 40;
         private double _fuel = 300;
         private double _powerConsumption = 0;
-        private double _storedEnergy = 1500;
+        private double _storedEnergy = 4500;
         private double _energyOutput = 0;
         private WorkMode _currentWorkMode;
+
+        //indicators colors
+        private Color _ellipseTemperatureColor = Colors.Black;
+
+        private Color _ellipseEnergyColor = Colors.Black;
+
+        public Color EllipseTemperatureColor
+        {
+            get => _ellipseTemperatureColor;
+            set
+            {
+                _ellipseTemperatureColor = value;
+                OnPropertyChanged(nameof(EllipseTemperatureColor));
+            }
+        }
+
+        public Color EllipseEnergyColor
+        {
+            get => _ellipseEnergyColor;
+            set
+            {
+                _ellipseEnergyColor = value;
+                OnPropertyChanged(nameof(EllipseEnergyColor));
+            }
+        }
 
         public double SpeedOfSplitting
         {
@@ -42,8 +68,20 @@ namespace AtomicReactorControl.ViewModel
                 if (value >= 0)
                 {
                     _temperature = value;
+                    OnPropertyChanged(nameof(Temperature));
                 }
-                OnPropertyChanged(nameof(Temperature));
+
+                if (Temperature >= 300)
+                {
+                    EllipseTemperatureColor = Colors.Orange;
+                    OnPropertyChanged(nameof(EllipseTemperatureColor));
+
+                }
+                else
+                {
+                    EllipseTemperatureColor = Colors.Green;
+                    OnPropertyChanged(nameof(EllipseTemperatureColor));
+                }
             }
         }
 
@@ -62,21 +100,29 @@ namespace AtomicReactorControl.ViewModel
             get => _currentWorkMode;
             set => _currentWorkMode = value;
         }
+
         public double StoredEnergy
         {
             get => _storedEnergy;
             set
             {
-                if (value < 0)
+                if (value >= 0)
                 {
-                    _storedEnergy = 0;
+                    _storedEnergy = value;
+                    OnPropertyChanged(nameof(StoredEnergy));
+                }
+
+                if (StoredEnergy >= 4000)
+                {
+                    EllipseEnergyColor = Colors.Green;
+                    OnPropertyChanged(nameof(EllipseEnergyColor));
+
                 }
                 else
                 {
-                    _storedEnergy = value;
+                    EllipseEnergyColor = Colors.Orange;
+                    OnPropertyChanged(nameof(EllipseEnergyColor));
                 }
-
-                OnPropertyChanged(nameof(StoredEnergy));
             }
         }
 
@@ -99,6 +145,8 @@ namespace AtomicReactorControl.ViewModel
             CurrentWorkMode = WorkMode.HeatWithinWork;
             StoredEnergy = 1500;
             EnergyOutput = 0;
+            EllipseTemperatureColor = Colors.Black;
+            EllipseEnergyColor =  Colors.Black;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

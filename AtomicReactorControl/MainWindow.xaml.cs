@@ -1,7 +1,5 @@
 ﻿using AtomicReactorControl.Enums;
 using AtomicReactorControl.Model;
-using AtomicReactorControl.Model.Interfaces;
-using AtomicReactorControl.ViewModel;
 using AtomicReactorControl.ViewModel.Interfaces;
 
 using System.Threading;
@@ -16,10 +14,7 @@ namespace AtomicReactorControl
     public partial class MainWindow : Window
     {
         private IReactorParams _reactorParams;
-        private IIndicatorsColors _indicatorsColors = new IndicatorsColors();
-        
         private Reactor _reactor;
-        private IIndicatorUpdater _indicatorUpdater;
 
         private static CancellationTokenSource _cancelTokenSource;
         private CancellationToken _token;
@@ -28,10 +23,7 @@ namespace AtomicReactorControl
         {
             InitializeComponent();
             _reactorParams = (IReactorParams)this.FindResource("ResourceReactorParams");
-            _indicatorsColors = (IIndicatorsColors)this.FindResource("ResourceIndicatorsColors");
-
             _reactor = new Reactor(_reactorParams);
-            _indicatorUpdater = new IndicatorUpdater(_indicatorsColors);
         }
 
         private void ResetToken()
@@ -47,6 +39,7 @@ namespace AtomicReactorControl
         {
             ResetToken();
             new Task(() => _reactor.ReactorCycle(_token)).Start();
+
             BTstart.IsEnabled = false;
         }
 

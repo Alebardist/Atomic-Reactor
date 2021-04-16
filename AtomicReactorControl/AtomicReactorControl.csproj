@@ -68,11 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\WorkModes.cs" />
-    <Compile Include="Model\Interfaces\IIndicatorUpdater.cs" />
-    <Compile Include="Model\IndicatorUpdater.cs" />
     <Compile Include="Model\Reactor.cs" />
-    <Compile Include="ViewModel\Interfaces\IIndicatorsColors.cs" />
-    <Compile Include="ViewModel\IndicatorsColors.cs" />
+    <Compile Include="ViewModel\ColorToSolidBrushConverter.cs" />
     <Compile Include="ViewModel\Interfaces\IReactorParams.cs" />
     <Compile Include="ViewModel\ParamsForReactor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -102,6 +99,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Model\Interfaces\" />
     <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

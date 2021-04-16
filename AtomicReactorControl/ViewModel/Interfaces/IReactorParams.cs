@@ -1,4 +1,5 @@
 ﻿using AtomicReactorControl.Enums;
+using System;
 using System.ComponentModel;
 
 namespace AtomicReactorControl.ViewModel.Interfaces

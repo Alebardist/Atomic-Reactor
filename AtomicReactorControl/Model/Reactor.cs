@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
-
+using System.Threading.Tasks;
 using AtomicReactorControl.ViewModel.Interfaces;
 
 namespace AtomicReactorControl.Model
 {
     public class Reactor
     {
-        static public event Action OnHighTemperature;
-
         private const double EnergyOutputModificator = 5;
         private const double FuelEfficiency = 0.05;
         private const double Coolant = 10;
-        private const double HighTemperature = 300;
 
         private readonly IReactorParams _reactorParams;
 
@@ -38,12 +35,6 @@ namespace AtomicReactorControl.Model
                     Debug.WriteLine("ReactorCycle interrupted by token");
 #endif
                     return;
-                }
-
-                if (_reactorParams.Temperature > 300 && OnHighTemperature != null)
-                {
-                    Debug.WriteLine($"EVENT {_reactorParams.Temperature} is > 300");
-                    OnHighTemperature();
                 }
 
                 ReadReactorParams();
