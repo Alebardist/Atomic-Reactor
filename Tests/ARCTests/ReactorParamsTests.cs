@@ -1,7 +1,5 @@
 using AtomicReactorControl.ViewModel;
 using AtomicReactorControl.ViewModel.Interfaces;
-
-using System;
 using Xunit;
 
 namespace ARCTests
@@ -14,13 +12,17 @@ namespace ARCTests
         public void StoredEnergyPropertyStoredEnergyTheory(int storedEnergy)
         {
             //Arrange
-            IReactorParams reactorParams = new ParamsForReactor() 
-            {
+            int expected = 0;
+
+            IReactorParams reactorParams = new ParamsForReactor() {
                 //Action
                 StoredEnergy = storedEnergy 
             };
+
+            var actual = reactorParams.StoredEnergy;
+
             //Assert
-            Assert.Equal(0, reactorParams.StoredEnergy);
+            Assert.Equal(expected, actual);
         }
     }
 }

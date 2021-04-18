@@ -167,6 +167,7 @@
                 Maximum="125"
                 Minimum="0"
                 Value="{Binding ElementName=SliderSplitting, Path=Value}" />
+            
             <TextBlock FontSize="20" Text="Stored energy" />
             <ProgressBar
                 Width="300"

@@ -1,9 +1,5 @@
-﻿using AtomicReactorControl.Enums;
-using AtomicReactorControl.Model;
+﻿using AtomicReactorControl.Model;
 using AtomicReactorControl.ViewModel.Interfaces;
-
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace AtomicReactorControl
@@ -13,57 +9,39 @@ namespace AtomicReactorControl
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IReactorParams _reactorParams;
-        private Reactor _reactor;
-
-        private static CancellationTokenSource _cancelTokenSource;
-        private CancellationToken _token;
+        private Launcher _launcher = new Launcher();
 
         public MainWindow()
         {
             InitializeComponent();
-            _reactorParams = (IReactorParams)this.FindResource("ResourceReactorParams");
-            _reactor = new Reactor(_reactorParams);
-        }
-
-        private void ResetToken()
-        {
-            if (_cancelTokenSource == null || _cancelTokenSource.IsCancellationRequested)
-            {
-                _cancelTokenSource = new CancellationTokenSource();
-                _token = _cancelTokenSource.Token;
-            }
+            //TODO: get rid of double call " (IReactorParams)this.FindResource("ResourceReactorParams") "
+            //create a variable IReactorParams _reactorParams ?
+            _launcher.ReactorParams = (IReactorParams)this.FindResource("ResourceReactorParams");
+            _launcher.Reactor = new Reactor((IReactorParams)this.FindResource("ResourceReactorParams"));
         }
 
         private void Button_Click_Start(object sender, RoutedEventArgs e)
         {
-            ResetToken();
-            new Task(() => _reactor.ReactorCycle(_token)).Start();
+            _launcher.RunTaskReactorCycleAndResetToken();
 
             BTstart.IsEnabled = false;
         }
 
         private void BTreset_Click(object sender, RoutedEventArgs e)
         {
-            _cancelTokenSource.Cancel();
-            _reactorParams.ResetParams();
+            _launcher.CancelTaskOfReactorCycleAndResetReactorParams();
+
             BTstart.IsEnabled = true;
         }
 
         private void RadioButton_mod1_Checked(object sender, RoutedEventArgs e)
         {
-            if (_reactorParams != null)
-            {
-                _reactorParams.CurrentWorkMode = WorkMode.HeatWithinWork;
-            }
+            _launcher.SwitchReactorModToRealTime();
         }
 
         private void RadioButton_mod2_Checked(object sender, RoutedEventArgs e)
         {
-            if (_reactorParams != null)
-            {
-                _reactorParams.CurrentWorkMode = WorkMode.HeatByFormulae;
-            }
+            _launcher.SwitchReactorModToImmediate();
         }
     }
 }
