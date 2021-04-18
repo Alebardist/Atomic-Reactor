@@ -7,19 +7,6 @@ namespace AtomicReactorControl.ViewModel
 {
     public class ParamsForReactor : INotifyPropertyChanged, Interfaces.IReactorParams
     {
-        private double _speedOfSplitting = 1;
-        private double _temperature = 40;
-        private double _fuel = 300;
-        private double _powerConsumption = 0;
-        private double _storedEnergy = 4500;
-        private double _energyOutput = 0;
-        private WorkMode _currentWorkMode;
-
-        //indicators colors
-        private Color _ellipseTemperatureColor = Colors.Black;
-
-        private Color _ellipseEnergyColor = Colors.Black;
-
         public Color EllipseTemperatureColor
         {
             get => _ellipseTemperatureColor;
@@ -146,10 +133,22 @@ namespace AtomicReactorControl.ViewModel
             StoredEnergy = 1500;
             EnergyOutput = 0;
             EllipseTemperatureColor = Colors.Black;
-            EllipseEnergyColor =  Colors.Black;
+            EllipseEnergyColor = Colors.Black;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private double _speedOfSplitting = 1;
+        private double _temperature = 40;
+        private double _fuel = 300;
+        private double _powerConsumption = 0;
+        private double _storedEnergy = 4500;
+        private double _energyOutput = 0;
+        private WorkMode _currentWorkMode;
+
+        //indicators colors
+        private Color _ellipseTemperatureColor = Colors.Black;
+        private Color _ellipseEnergyColor = Colors.Black;
 
         private void OnPropertyChanged([CallerMemberName] string prop = "")
         {

@@ -139,12 +139,12 @@
                     Width="20"
                     Height="20"
                     Fill="{Binding EllipseTemperatureColor, Source={StaticResource ResourceReactorParams}, Converter={StaticResource ColorToSolidBrushConverter}}" />
-                <TextBlock Text="Temp status" />
+                <TextBlock Text="Temp status" Margin="5, 0"/>
                 <Ellipse
                     Width="20"
                     Height="20"
                     Fill="{Binding EllipseEnergyColor, Source={StaticResource ResourceReactorParams}, Converter={StaticResource ColorToSolidBrushConverter}}" />
-                <TextBlock Text="Energy status" />
+                <TextBlock Text="Energy status" Margin="5, 0"/>
             </StackPanel>
 
         </StackPanel>
