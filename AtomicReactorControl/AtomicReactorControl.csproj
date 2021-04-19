@@ -103,6 +103,12 @@
     <Folder Include="Model\Interfaces\" />
     <Folder Include="View\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\atom.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\radiation.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
