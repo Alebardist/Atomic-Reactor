@@ -9,15 +9,20 @@ namespace AtomicReactorControl
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Launcher _launcher = new Launcher();
+        /* fake initialization is necessary because
+         * wpf is trying to call each method of
+         * MainWindow before its constructor 
+         */
+        private readonly Launcher _launcher = new Launcher();
 
         public MainWindow()
         {
             InitializeComponent();
-            //TODO: get rid of double call " (IReactorParams)this.FindResource("ResourceReactorParams") "
-            //create a variable IReactorParams _reactorParams ?
-            _launcher.ReactorParams = (IReactorParams)this.FindResource("ResourceReactorParams");
-            _launcher.Reactor = new Reactor((IReactorParams)this.FindResource("ResourceReactorParams"));
+
+            IReactorParams reactorParams = (IReactorParams)this.FindResource("ResourceReactorParams");
+            Reactor reactor = new Reactor(reactorParams);
+
+            _launcher = new Launcher(reactorParams, reactor);  // real initialization
         }
 
         private void Button_Click_Start(object sender, RoutedEventArgs e)

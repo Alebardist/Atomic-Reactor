@@ -15,6 +15,14 @@ namespace AtomicReactorControl
         private static CancellationTokenSource _cancelTokenSource;
         private CancellationToken _token;
 
+        public Launcher(){}
+
+        public Launcher(IReactorParams reactorParams, Reactor reactor)
+        {
+            ReactorParams = reactorParams;
+            Reactor = reactor;
+        }
+
         public void RunTaskReactorCycleAndResetToken()
         {
             ResetToken();
