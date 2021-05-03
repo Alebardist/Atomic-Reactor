@@ -13,7 +13,7 @@ namespace AtomicReactorControl.ViewModel
             set
             {
                 _ellipseTemperatureColor = value;
-                OnPropertyChanged(nameof(EllipseTemperatureColor));
+                OnPropertyChanged();
             }
         }
 
@@ -23,7 +23,7 @@ namespace AtomicReactorControl.ViewModel
             set
             {
                 _ellipseEnergyColor = value;
-                OnPropertyChanged(nameof(EllipseEnergyColor));
+                OnPropertyChanged();
             }
         }
 
@@ -33,7 +33,7 @@ namespace AtomicReactorControl.ViewModel
             set
             {
                 _speedOfSplitting = value;
-                OnPropertyChanged(nameof(SpeedOfSplitting));
+                OnPropertyChanged();
             }
         }
 
@@ -43,7 +43,7 @@ namespace AtomicReactorControl.ViewModel
             set
             {
                 _powerConsumption = value;
-                OnPropertyChanged(nameof(PowerConsumption));
+                OnPropertyChanged();
             }
         }
 
@@ -55,19 +55,19 @@ namespace AtomicReactorControl.ViewModel
                 if (value >= 0)
                 {
                     _temperature = value;
-                    OnPropertyChanged(nameof(Temperature));
+                    OnPropertyChanged();
                 }
 
                 if (Temperature >= 300)
                 {
                     EllipseTemperatureColor = Colors.Orange;
-                    OnPropertyChanged(nameof(EllipseTemperatureColor));
+                    OnPropertyChanged();
 
                 }
                 else
                 {
                     EllipseTemperatureColor = Colors.Green;
-                    OnPropertyChanged(nameof(EllipseTemperatureColor));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace AtomicReactorControl.ViewModel
             set
             {
                 _fuel = value;
-                OnPropertyChanged(nameof(Fuel));
+                OnPropertyChanged();
             }
         }
 
@@ -96,19 +96,19 @@ namespace AtomicReactorControl.ViewModel
                 if (value >= 0)
                 {
                     _storedEnergy = value;
-                    OnPropertyChanged(nameof(StoredEnergy));
+                    OnPropertyChanged();
                 }
 
                 if (StoredEnergy >= 4000)
                 {
                     EllipseEnergyColor = Colors.Green;
-                    OnPropertyChanged(nameof(EllipseEnergyColor));
+                    OnPropertyChanged();
 
                 }
                 else
                 {
                     EllipseEnergyColor = Colors.Orange;
-                    OnPropertyChanged(nameof(EllipseEnergyColor));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -119,7 +119,7 @@ namespace AtomicReactorControl.ViewModel
             set
             {
                 _energyOutput = value;
-                OnPropertyChanged(nameof(EnergyOutput));
+                OnPropertyChanged();
             }
         }
 
