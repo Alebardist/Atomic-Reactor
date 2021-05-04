@@ -21,7 +21,7 @@ namespace AtomicReactorControl.ViewModel
             {
                 return new SolidColorBrush(Colors.Green);
             }
-            else throw new ArgumentException($"{value} is wrong color");
+            else throw new ArgumentException($"No processor implemented for this color: {value}");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -8,9 +8,9 @@ namespace AtomicReactorControl.Model
 {
     public class Reactor
     {
-        private const double EnergyOutputModificator = 5;
-        private const double FuelEfficiency = 0.05;
-        private const double Coolant = 10;
+        private const double _energyOutputModificator = 5;
+        private const double _fuelEfficiency = 0.05;
+        private const double _coolant = 10;
 
         private readonly IReactorParams _reactorParams;
 
@@ -27,7 +27,7 @@ namespace AtomicReactorControl.Model
         {
             //set starting parameters
             ReadReactorParams();
-            while (_reactorParams.Temperature < 380 && _reactorParams.Fuel >= FuelEfficiency * _reactorParams.SpeedOfSplitting)
+            while (_reactorParams.Temperature < 380 && _reactorParams.Fuel >= _fuelEfficiency * _reactorParams.SpeedOfSplitting)
             {
                 if (token.IsCancellationRequested)
                 {
@@ -65,7 +65,7 @@ namespace AtomicReactorControl.Model
         {
             _reactorParams.Temperature = _reactorParams.Temperature;
             _reactorParams.Fuel = _reactorParams.Fuel;
-            _reactorParams.EnergyOutput = EnergyOutputModificator * _reactorParams.SpeedOfSplitting;
+            _reactorParams.EnergyOutput = _energyOutputModificator * _reactorParams.SpeedOfSplitting;
         }
 
         private void ReadReactorParams()
@@ -76,7 +76,7 @@ namespace AtomicReactorControl.Model
 
         private void ComputeEnergyOutput()
         {
-            _reactorParams.StoredEnergy += EnergyOutputModificator * _reactorParams.SpeedOfSplitting;
+            _reactorParams.StoredEnergy += _energyOutputModificator * _reactorParams.SpeedOfSplitting;
         }
 
         private void ComputeEnergyConsumption()
@@ -107,12 +107,12 @@ namespace AtomicReactorControl.Model
 
         private void ComputeFuelConsumption()
         {
-            _reactorParams.Fuel -= FuelEfficiency * _reactorParams.SpeedOfSplitting;
+            _reactorParams.Fuel -= _fuelEfficiency * _reactorParams.SpeedOfSplitting;
         }
 
         private void ComputeCoolant()
         {
-            _reactorParams.Temperature -= Coolant;
+            _reactorParams.Temperature -= _coolant;
         }
     }
 }

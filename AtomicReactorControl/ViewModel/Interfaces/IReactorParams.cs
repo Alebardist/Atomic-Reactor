@@ -1,6 +1,4 @@
 ﻿using AtomicReactorControl.Enums;
-using System;
-using System.ComponentModel;
 
 namespace AtomicReactorControl.ViewModel.Interfaces
 {
@@ -13,8 +11,6 @@ namespace AtomicReactorControl.ViewModel.Interfaces
         double SpeedOfSplitting { get; set; }
         double StoredEnergy { get; set; }
         double Temperature { get; set; }
-
-        event PropertyChangedEventHandler PropertyChanged;
 
         void ResetParams();
     }
