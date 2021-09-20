@@ -21,13 +21,12 @@ namespace AtomicReactorControl.Model
         }
 
         /// <summary>
-        /// starts reactor cycle
+        /// Starts reactor cycle
         /// </summary>
         /// <param name="token">CancellationToken</param>
-        public async void ReactorCycleAsync(CancellationToken token)
+        public async void StartReactorCycleAsync(CancellationToken token)
         {
             //set starting parameters
-            ReadReactorParams();
             while (_reactorParams.Temperature < 380 && _reactorParams.Fuel >= FuelEfficiency * _reactorParams.SpeedOfSplitting)
             {
                 if (token.IsCancellationRequested)
@@ -38,7 +37,6 @@ namespace AtomicReactorControl.Model
                     return;
                 }
 
-                ReadReactorParams();
                 ComputeEnergyOutput();
                 ComputeEnergyConsumption();
                 ComputeTemperatureIncrease();
@@ -64,15 +62,7 @@ namespace AtomicReactorControl.Model
 
         private void SetReactorParams()
         {
-            _reactorParams.Temperature = _reactorParams.Temperature;
-            _reactorParams.Fuel = _reactorParams.Fuel;
             _reactorParams.EnergyOutput = EnergyOutputModificator * _reactorParams.SpeedOfSplitting;
-        }
-
-        private void ReadReactorParams()
-        {
-            _reactorParams.Temperature = _reactorParams.Temperature;
-            _reactorParams.Fuel = _reactorParams.Fuel;
         }
 
         private void ComputeEnergyOutput()
