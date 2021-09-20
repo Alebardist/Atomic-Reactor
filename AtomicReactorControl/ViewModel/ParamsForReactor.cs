@@ -146,7 +146,7 @@ namespace AtomicReactorControl.ViewModel
         private double _energyOutput = 0;
         private WorkMode _currentWorkMode;
 
-        //indicators colors
+        //indicators
         private Color _ellipseTemperatureColor = Colors.Black;
         private Color _ellipseEnergyColor = Colors.Black;
 

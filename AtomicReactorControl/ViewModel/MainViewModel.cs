@@ -58,7 +58,7 @@ namespace AtomicReactorControl.ViewModel
 
         private void StartCycle()
         {
-            new Task(() => _reactor.ReactorCycle(_token)).Start();
+            new Task(() => _reactor.ReactorCycleAsync(_token)).Start();
         }
 
         private void ResetParamsAndToken()
